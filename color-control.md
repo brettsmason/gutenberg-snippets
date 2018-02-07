@@ -6,12 +6,12 @@ This example shows how to implement a background color control, but the process 
 
 ```
 const {
-    InspectorControls,
-    ColorPalette,
+  InspectorControls,
+  ColorPalette,
 } = wp.blocks;
 
 const {
-    PanelColor
+  PanelColor
 } = wp.components;
 ```
 
@@ -19,9 +19,9 @@ const {
 
 ```
 attributes: {
-    backgroundColor: {
-        type: 'string'
-    }
+  backgroundColor: {
+    type: 'string'
+  }
 }
 ```
 
@@ -31,7 +31,7 @@ First you need to handle the updating of the color. This sits directly in the ed
 
 ```
 const onChangeBackgroundColor = value => {
-    props.setAttributes( { backgroundColor: value } );
+  props.setAttributes( { backgroundColor: value } );
 };
 ```
 Secondly you need to render the actual color control.
@@ -40,16 +40,16 @@ Secondly you need to render the actual color control.
 
 ```
 {
-    !! props.focus && (
-        <InspectorControls key="inspector">
-            <PanelColor title={ __( 'Background Color' ) } colorValue={ props.attributes.backgroundColor }>
-                <ColorPalette
-                    value={ props.attributes.backgroundColor }
-                    onChange={ onChangeBackgroundColor }
-                />
-            </PanelColor>
-        </InspectorControls>
-    )
+  !! props.focus && (
+    <InspectorControls key="inspector">
+      <PanelColor title={ __( 'Background Color' ) } colorValue={ props.attributes.backgroundColor }>
+        <ColorPalette
+          value={ props.attributes.backgroundColor }
+          onChange={ onChangeBackgroundColor }
+        />
+      </PanelColor>
+    </InspectorControls>
+  )
 }
 ```
 
@@ -57,10 +57,10 @@ Lets assume you want to apply the color directly to the `div` as a `style` tag.
 
 ```
 <div
-    className={props.className}
-    style={{
-        backgroundColor: props.attributes.backgroundColor
-    }}
+  className={props.className}
+  style={{
+    backgroundColor: props.attributes.backgroundColor
+  }}
 >
 ```
 
@@ -70,10 +70,10 @@ You also need to render the style on the save prop. In this example it uses the 
 
 ```
 <div
-    className={props.className}
-    style={{
-        backgroundColor: props.attributes.backgroundColor
-    }}
+  className={props.className}
+  style={{
+    backgroundColor: props.attributes.backgroundColor
+  }}
 >
 ```
 
@@ -82,9 +82,9 @@ You also need to render the style on the save prop. In this example it uses the 
 ```
 const { __ } = wp.i18n;
 const {
-	registerBlockType,
-	InspectorControls,
-	ColorPalette,
+  registerBlockType,
+  InspectorControls,
+  ColorPalette,
 } = wp.blocks;
 
 const {
@@ -92,57 +92,57 @@ const {
 } = wp.components;
 
 registerBlockType('example/color-control', {
-	title: __('Example color control'),
-	category: 'common',
-	icon: 'shield',
-	keywords: [__('color control')],
-	attributes: {
-		backgroundColor: {
-			type: 'string'
-		}
-	},
+  title: __('Example color control'),
+  category: 'common',
+  icon: 'shield',
+  keywords: [__('color control')],
+  attributes: {
+    backgroundColor: {
+      type: 'string'
+    }
+  },
 
-	edit: props => {
+  edit: props => {
 
-		const onChangeBackgroundColor = value => {
-			props.setAttributes( { backgroundColor: value } );
-		};
+    const onChangeBackgroundColor = value => {
+      props.setAttributes( { backgroundColor: value } );
+    };
 
-		return (
-			<div
-				className={props.className}
-				style={{
-					backgroundColor: props.attributes.backgroundColor
-				}}
-			>
-				{
-					!! props.focus && (
-						<InspectorControls key="inspector">
-							<PanelColor title={ __( 'Background Color' ) } colorValue={ props.attributes.backgroundColor }>
-								<ColorPalette
-									value={ props.attributes.backgroundColor }
-									onChange={ onChangeBackgroundColor }
-								/>
-							</PanelColor>
-						</InspectorControls>
-					)
-				}
+    return (
+      <div
+        className={props.className}
+        style={{
+          backgroundColor: props.attributes.backgroundColor
+        }}
+      >
+        {
+          !! props.focus && (
+            <InspectorControls key="inspector">
+              <PanelColor title={ __( 'Background Color' ) } colorValue={ props.attributes.backgroundColor }>
+                <ColorPalette
+                  value={ props.attributes.backgroundColor }
+                  onChange={ onChangeBackgroundColor }
+                />
+              </PanelColor>
+            </InspectorControls>
+          )
+        }
 
-				<p>My content</p>
-			</div>
-		);
-	},
-	save: props => {
-		return (
-			<div
-				className={props.className}
-				style={{
-					backgroundColor: props.attributes.backgroundColor
-				}}
-			>
-                <p>My content</p>
-            </div>
-		);
-	}
+        <p>My content</p>
+      </div>
+    );
+  },
+  save: props => {
+    return (
+      <div
+        className={props.className}
+        style={{
+          backgroundColor: props.attributes.backgroundColor
+        }}
+      >
+        <p>My content</p>
+      </div>
+    );
+  }
 });
 ```
