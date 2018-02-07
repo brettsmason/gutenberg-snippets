@@ -40,7 +40,7 @@ Secondly you need to render the actual color control.
 
 ```
 {
-    !!props.focus ? (
+    !! props.focus && (
         <InspectorControls key="inspector">
             <PanelColor title={ __( 'Background Color' ) } colorValue={ props.attributes.backgroundColor }>
                 <ColorPalette
@@ -48,7 +48,7 @@ Secondly you need to render the actual color control.
                     onChange={ onChangeBackgroundColor }
                 />
             </PanelColor>
-        </InspectorControls>,
+        </InspectorControls>
     )
 }
 ```
@@ -102,7 +102,6 @@ registerBlockType('example/color-control', {
 		}
 	},
 
-    // Displayed on the edit screen
 	edit: props => {
 
 		const onChangeBackgroundColor = value => {
@@ -116,21 +115,21 @@ registerBlockType('example/color-control', {
 					backgroundColor: props.attributes.backgroundColor
 				}}
 			>
-                <p>My div</p>
-            </div>
+				{
+					!! props.focus && (
+						<InspectorControls key="inspector">
+							<PanelColor title={ __( 'Background Color' ) } colorValue={ props.attributes.backgroundColor }>
+								<ColorPalette
+									value={ props.attributes.backgroundColor }
+									onChange={ onChangeBackgroundColor }
+								/>
+							</PanelColor>
+						</InspectorControls>
+					)
+				}
 
-            {
-                !!props.focus ? (
-                    <InspectorControls key="inspector">
-                        <PanelColor title={ __( 'Background Color' ) } colorValue={ props.attributes.backgroundColor }>
-                            <ColorPalette
-                                value={ props.attributes.backgroundColor }
-                                onChange={ onChangeBackgroundColor }
-                            />
-                        </PanelColor>
-                    </InspectorControls>
-                )
-            }
+				<p>My content</p>
+			</div>
 		);
 	},
 	save: props => {
@@ -141,7 +140,7 @@ registerBlockType('example/color-control', {
 					backgroundColor: props.attributes.backgroundColor
 				}}
 			>
-                <p>My div</p>
+                <p>My content</p>
             </div>
 		);
 	}
